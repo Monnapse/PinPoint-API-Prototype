@@ -5,8 +5,8 @@ const doc = {
         title: 'PinPoint API Prototype',
         description: 'PinPoint API Prototype Documentation',
     },
-    host: 'localhost:3000',
-    schemes: ['http', 'https'],
+    host: 'pinpoint-api-prototype.onrender.com',
+    schemes: ['https', 'http'],
 }
 
 const outputFile = './swagger.json';

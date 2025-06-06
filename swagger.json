@@ -5,11 +5,11 @@
     "description": "PinPoint API Prototype Documentation",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "pinpoint-api-prototype.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/api-docs": {
