@@ -1,0 +1,24 @@
+{
+  "name": "pinpoint-api-prototype",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Monnapse/PinPoint-API-Prototype#readme",
+  "bugs": {
+    "url": "https://github.com/Monnapse/PinPoint-API-Prototype/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Monnapse/PinPoint-API-Prototype.git"
+  },
+  "license": "ISC",
+  "author": "Monnapse",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0"
+  }
+}
