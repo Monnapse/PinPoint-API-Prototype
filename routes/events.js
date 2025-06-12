@@ -4,6 +4,7 @@ const router = express.Router();
 
 const eventsController = require('../controllers/event');
 
+// Default Event Routes
 router.get('/', eventsController.getAll);
 router.get('/:id', eventsController.getById);
 router.post('/', validateEvent(), eventsController.create);
