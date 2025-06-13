@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator');
 const mongodb = require('../database');
 const ObjectId = require('mongodb').ObjectId;
 
-const tempUserId = '6843166722467116e87fba42'; // TODO: Replace with actual user ID from authentication middleware
+//const tempUserId = '6843166722467116e87fba42'; // TODO: Replace with actual user ID from authentication middleware
 
 const getAllComments = async () => {
     try {
@@ -46,8 +46,12 @@ const postComment = async (req, res) => {
     }
 
     try {
+        if (!req.session || !req.session.user || !req.session.user.id) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+        console.log(req.params.eventId, req.session.user.id);
         const eventId = new ObjectId(req.params.eventId);
-        const userId = new ObjectId(tempUserId);
+        const userId = req.session.user.id;
 
         const commentData = req.body;
         const comment = {

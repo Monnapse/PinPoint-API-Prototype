@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator');
 const mongodb = require('../database');
 const ObjectId = require('mongodb').ObjectId;
 
-const tempUserId = '6843166722467116e87fba42'; // TODO: Replace with actual user ID from authentication middleware
+//const tempUserId = '6843166722467116e87fba42'; // TODO: Replace with actual user ID from authentication middleware
 
 const getAllRsvps = async () => {
     try {
@@ -21,8 +21,11 @@ const joinEvent = async (req, res) => {
     //#swagger.description = 'Join an event'
 
     try {
+        if (!req.session || !req.session.user || !req.session.user.id) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
         const eventId = new ObjectId(req.params.id);
-        const userId = new ObjectId(tempUserId);
+        const userId = req.session.user.id;
 
         //console.log("Event ID:", eventId.toString());
 
@@ -35,20 +38,20 @@ const joinEvent = async (req, res) => {
         for (eventObject of events) {
             if (
                 eventObject.event_id && eventObject.event_id.equals(eventId) &&
-                eventObject.user_id && eventObject.user_id.equals(userId)
+                eventObject.user_id && eventObject.user_id == userId
             ) {
                 return res.status(400).json({ message: 'You have already joined this event.' });
             }
         }
 
-        console.log("Joining event with ID:", eventId.toString(), "for user ID:", userId.toString());
+        //console.log("Joining event with ID:", eventId.toString(), "for user ID:", userId.toString());
 
         const rsvp = {
             event_id: eventId,
             user_id: userId,
         };
 
-        console.log('Saving RSVP:', rsvp);
+        //console.log('Saving RSVP:', rsvp);
 
         const response = await mongodb.getDatabase().db().collection('rsvp').insertOne(rsvp);
         if (response.acknowledged) {
@@ -67,8 +70,11 @@ const leaveEvent = async (req, res) => {
     //#swagger.description = 'Leave an event'
 
     try {
+        if (!req.session || !req.session.user || !req.session.user.id) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
         const eventId = new ObjectId(req.params.id);
-        const userId = new ObjectId(tempUserId);
+        const userId = req.session.user.id;
 
         const response = await mongodb.getDatabase().db().collection('rsvp').deleteOne({
             event_id: eventId,
@@ -118,8 +124,11 @@ const getRSVPStatus = async (req, res) => {
     //#swagger.description = 'Get user RSVP status'
 
     try {
+        if (!req.session || !req.session.user || !req.session.user.id) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
         const eventId = new ObjectId(req.params.id);
-        const userId = new ObjectId(tempUserId);
+        const userId = req.session.user.id;
 
         const rsvp = await mongodb.getDatabase().db().collection('rsvp').find({
             event_id: eventId,
