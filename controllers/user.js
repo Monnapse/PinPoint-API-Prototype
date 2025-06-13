@@ -21,7 +21,7 @@ const getById = async (req, res) => {
     //#swagger.tags = ['Users']
     //#swagger.description = 'Get user by ID'
     try {
-        const userId = req.session.user.id;
+        const userId = new ObjectId(req.params.id);
         const result = await mongodb.getDatabase().db().collection('users').find({_id: userId});
         result.toArray().then((users) => {
             res.setHeader('Content-Type', 'application/json');
@@ -71,7 +71,7 @@ const update = async (req, res) => {
     }
 
     try {
-        const userId = req.session.user.id;
+        const userId = new ObjectId(req.params.id);
         const userData = req.body;
         const user = {
             username: userData.username,
@@ -94,7 +94,7 @@ const remove = async (req, res) => {
     //#swagger.tags = ['Users']
     //#swagger.description = 'Delete a user'
     try {
-        const userId = req.session.user.id;
+        const userId = new ObjectId(req.params.id);
        const response = await mongodb.getDatabase().db().collection('users').deleteOne({ _id: userId });
         if (response.deletedCount > 0) {
             res.status(204).send();
