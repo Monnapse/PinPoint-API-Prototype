@@ -231,6 +231,18 @@
                 },
                 "start_date_time": {
                   "example": "any"
+                },
+                "end_date_time": {
+                  "example": "any"
+                },
+                "location": {
+                  "example": "any"
+                },
+                "organizer_id": {
+                  "example": "any"
+                },
+                "tags": {
+                  "example": "any"
                 }
               }
             }
@@ -303,6 +315,18 @@
                   "example": "any"
                 },
                 "start_date_time": {
+                  "example": "any"
+                },
+                "end_date_time": {
+                  "example": "any"
+                },
+                "location": {
+                  "example": "any"
+                },
+                "organizer_id": {
+                  "example": "any"
+                },
+                "tags": {
                   "example": "any"
                 }
               }

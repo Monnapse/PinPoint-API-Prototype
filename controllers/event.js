@@ -48,6 +48,10 @@ const create = async (req, res) => {
             name: eventData.name,
             description: eventData.description,
             start_date_time: eventData.start_date_time,
+            end_date_time: eventData.end_date_time,
+            location: eventData.location,
+            organizer_id: eventData.organizer_id,
+            tags: eventData.tags,
         };
 
         const response = await mongodb.getDatabase().db().collection('events').insertOne(event);
@@ -78,6 +82,10 @@ const update = async (req, res) => {
             name: eventData.name,
             description: eventData.description,
             start_date_time: eventData.start_date_time,
+            end_date_time: eventData.end_date_time,
+            location: eventData.location,
+            organizer_id: eventData.organizer_id,
+            tags: eventData.tags,
         };
 
         const response = await mongodb.getDatabase().db().collection('events').replaceOne({ _id: eventId }, event);
